@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faizan Ahmed — Agentic AI Engineer</title>
+<meta name="description" content="Faizan Ahmed — Agentic AI Engineer, ML/DL Enthusiast & Full-Stack Web Developer building intelligent autonomous systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-text">INITIALIZING SYSTEM...</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- Canvas BG -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Nav -->
+<nav id="navbar">
+  <div class="nav-logo">FA.</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <a href="mailto:faizan34038@gmail.com" class="nav-cta">hire me →</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="nav-links">
+    <li><a href="#about" onclick="closeMobile()">about</a></li>
+    <li><a href="#skills" onclick="closeMobile()">skills</a></li>
+    <li><a href="#projects" onclick="closeMobile()">projects</a></li>
+    <li><a href="#education" onclick="closeMobile()">education</a></li>
+    <li><a href="#contact" onclick="closeMobile()">contact</a></li>
+  </ul>
+<a href="mailto:faizan34038@gmail.com" class="mob-nav-cta">hire me →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-content fade-up">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        AVAILABLE FOR OPPORTUNITIES
+      </div>
+      <h1 class="hero-name">Faizan<br>Ahmed</h1>
+      <div class="hero-role" id="typed-role"><span class="cursor-blink">_</span></div>
+      <p class="hero-desc">Building Intelligent AI Systems, Autonomous Agents, and Modern Web Experiences that push the boundaries of what's possible.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">⚡ View Projects</a>
+        <a href="#contact" class="btn-outline">📧 Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" data-count="7">0</div>
+          <div class="stat-label">AI/ML Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-count="4">0</div>
+          <div class="stat-label">Tech Stacks</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-count="2">0</div>
+          <div class="stat-label">Years Building</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual fade-up stagger-2">
+      <div class="hero-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+      </div>
+      <div class="avatar-container">
+        <div class="avatar-ring"></div>
+        <div class="avatar-ring2"></div>
+        <div class="avatar-inner">
+          <div class="avatar-letters">FA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual fade-up">
+      <div class="about-card">
+        <div class="about-avatar">FA</div>
+        <div class="about-card-name">Faizan Ahmed</div>
+        <div class="about-card-role">Agentic AI Engineer</div>
+        <ul class="about-info-list">
+          <li><span class="info-icon">📍</span>ChakJamal, Jhelum, Punjab, Pakistan</li>
+          <li><span class="info-icon">🎓</span>B.IT — Univ. of Gujrat (2027)</li>
+          <li><span class="info-icon">🌐</span>English · Urdu · Punjabi</li>
+          <li><span class="info-icon">🤖</span>Agentic AI Systems</li>
+          <li><span class="info-icon">⚡</span>Available for Projects</li>
+        </ul>
+      </div>
+      <div class="floating-badges">
+        <div class="fbadge">🧠 LangChain</div>
+        <div class="fbadge">⚡ LangGraph</div>
+        <div class="fbadge">🔮 React</div>
+      </div>
+    </div>
+    <div class="about-text fade-up stagger-2">
+      <h3>Crafting the<br><span style="background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Future of AI</span></h3>
+      <p>I am a passionate Agentic AI Engineer and Full-Stack Web Developer currently pursuing a Bachelor's degree in Information Technology from the University of Gujrat. I specialize in building intelligent AI assistants, autonomous agent systems, machine learning applications, and scalable web platforms.</p>
+      <p>My expertise spans Python, JavaScript, React, Next.js, Express.js, MongoDB, LangChain, LangGraph, AI automation, and deep learning technologies. I am deeply interested in Agentic AI, autonomous systems, AI workflows, and advanced conversational assistants.</p>
+      <p>My goal is to build next-generation intelligent systems that combine automation, reasoning, memory, and human-like interaction — inspired by systems like JARVIS.</p>
+      <div class="about-tags">
+        <span class="tag">LangChain</span>
+        <span class="tag">LangGraph</span>
+        <span class="tag">React</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">Scikit Learn</span>
+        <span class="tag">Pytorch</span>
+        <span class="tag">Autonomous Agents</span>
+        <span class="tag">RAG Systems</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-wrapper">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Technical Arsenal</h2>
+      <p class="section-sub">A comprehensive toolkit spanning AI engineering, machine learning, and modern web development.</p>
+    </div>
+    <div class="skills-tabs">
+      <button class="skill-tab active" data-tab="ai">AI & Agents</button>
+      <button class="skill-tab" data-tab="ml">ML & DL</button>
+      <button class="skill-tab" data-tab="web">Web Dev</button>
+      <button class="skill-tab" data-tab="lang">Languages</button>
+    </div>
+    <div class="skill-grid" id="skill-grid"></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-wrapper">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Featured Work</h2>
+      <p class="section-sub">AI-powered systems, intelligent agents, and machine learning applications built for real-world impact.</p>
+    </div>
+    <div class="project-filters">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="ai">AI / Agentic</button>
+      <button class="filter-btn" data-filter="ml">Machine Learning</button>
+      <button class="filter-btn" data-filter="dl">Deep Learning</button>
+    </div>
+    <div class="projects-grid" id="projects-grid"></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div style="max-width:1200px;margin:0 auto;padding:0">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Academic Journey</h2>
+    </div>
+    <div class="edu-wrapper">
+      <div class="timeline">
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot">🎓</div>
+          <div class="timeline-content">
+            <div class="timeline-year">2023 — 2027 (Expected)</div>
+            <div class="timeline-title">Bachelor's in Information Technology</div>
+            <div class="timeline-sub">University of Gujrat, Punjab, Pakistan</div>
+            <div class="timeline-desc">Studying core computer science fundamentals with deep focus on AI/ML, software engineering, data structures, algorithms, and modern web technologies. Actively applying academic knowledge through hands-on AI and ML projects.</div>
+          </div>
+        </div>
+        <div class="timeline-item fade-up stagger-2">
+          <div class="timeline-dot">🤖</div>
+          <div class="timeline-content">
+            <div class="timeline-year">Self-Directed Learning</div>
+            <div class="timeline-title">Agentic AI & LangChain Specialization</div>
+            <div class="timeline-sub">Online Platforms & Project-Based Learning</div>
+            <div class="timeline-desc">Advanced study of LangChain, LangGraph, autonomous agent architectures, RAG systems, prompt engineering, and LLM integrations. Built multiple real-world projects applying these technologies.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="journey-wrapper">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Evolution Path</h2>
+      <p class="section-sub">A continuous journey of learning, building, and advancing toward cutting-edge AI systems.</p>
+    </div>
+    <div class="journey-path" id="journey-path"></div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="ach-wrapper">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Milestones</h2>
+    </div>
+    <div class="ach-grid" id="ach-grid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Let's Build Together</h2>
+      <p class="section-sub">Open to AI engineering roles, collaboration on intelligent systems, and exciting projects.</p>
+    </div>
+    <div class="contact-wrapper">
+      <div class="contact-info fade-up">
+        <h3>Start a<br><span style="background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Conversation</span></h3>
+        <p>Whether you're looking to build an AI-powered product, need a full-stack developer, or want to collaborate on cutting-edge ML research — I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a href="mailto:faizan34038@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            <div>
+              <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:2px">EMAIL</div>
+              faizan34038@gmail.com
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/faizanxahmed/" class="contact-link" target="_blank">
+            <div class="contact-link-icon">💼</div>
+            <div>
+              <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:2px">LINKEDIN</div>
+              linkedin.com/in/faizanxahmed
+            </div>
+          </a>
+          <a href="https://github.com/Anonymous-847" class="contact-link" target="_blank">
+            <div class="contact-link-icon">⚡</div>
+            <div>
+              <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:2px">GITHUB</div>
+              github.com/Anonymous-847
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">Faizan Ahmed.</div>
+  <div class="footer-text">© 2025 — Agentic AI Engineer, Punjab PK</div>
+  <div class="footer-socials">
+    <a href="https://github.com/Anonymous-847" class="social-btn" target="_blank">GH</a>
+    <a href="https://www.linkedin.com/in/faizanxahmed/" class="social-btn" target="_blank">LI</a>
+    <a href="mailto:faizan34038@gmail.com" class="social-btn">✉</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
