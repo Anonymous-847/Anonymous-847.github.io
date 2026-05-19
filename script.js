@@ -115,7 +115,18 @@ const projectsData = [
     features:['Business Intelligence','Multi-Algorithm','Analytics Dashboard'],
     color:'#8b5cf6',
     link:"https://github.com/Anonymous-847/Smart-Customer-Intelligence-System"
-  },
+  }
+  ,
+  {
+    id:8, name:'Burger Vibe', category:'wd',
+    icon: '⚛️',
+    catLabel:'Web Development', catClass:'cat-web',
+    desc:'Smart analytics system combining K-Means clustering and Decision Tree algorithms to analyze customer behavior and generate intelligent business insights.',
+    stack:['Javascript','clerk','react','App Routing'],
+    features:['Next JS 15','Cart Context','Clerk Authentication'],
+    color:'#8b5cf6',
+    link:"https://github.com/Anonymous-847/Burger-Vibe"
+  }
 ];
 
 const journeySteps = [
