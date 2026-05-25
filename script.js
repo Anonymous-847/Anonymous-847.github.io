@@ -54,7 +54,8 @@ const projectsData = [
     stack:['Next.js','LangChain','MistralAI','TypeScript'],
     features:['Conversational AI','Context-Aware','Real-Time Responses'],
     color:'#22d3ee',
-    link:"https://github.com/Anonymous-847/Zoe--AI-Chatbot.git"
+    link:"https://github.com/Anonymous-847/Zoe--AI-Chatbot.git",
+    preview:"##"
   },
   {
     id:2, name:'Customer Segmentation', category:'ml',
@@ -64,7 +65,8 @@ const projectsData = [
     stack:['Python','Scikit-learn','Pandas','NumPy','Matplotlib'],
     features:['K-Means Clustering','Data Visualization','Business Insights'],
     color:'#8b5cf6',
-    link:"https://github.com/Anonymous-847/Customer-Segmentation-using-KMeans-Clustering"
+    link:"https://github.com/Anonymous-847/Customer-Segmentation-using-KMeans-Clustering",
+    preview:"##"
   },
   {
     id:3, name:'Salary Prediction', category:'ml',
@@ -74,7 +76,8 @@ const projectsData = [
     stack:['Python','Logistic Regression','Pandas','Scikit-learn'],
     features:['Regression Analysis','Feature Engineering','Prediction Model'],
     color:'#8b5cf6',
-    link:"https://github.com/Anonymous-847/Placement-Salary-Prediction-System"
+    link:"https://github.com/Anonymous-847/Placement-Salary-Prediction-System",
+    preview:"##"
   },
   {
     id:4, name:'Heart Disease Predictor', category:'ml',
@@ -84,7 +87,8 @@ const projectsData = [
     stack:['Python','PCA','Logistic Regression','Data Visualization'],
     features:['Medical AI','PCA Reduction','Risk Prediction'],
     color:'#8b5cf6',
-    link:"https://github.com/Anonymous-847/Heart-Disease-Prediction-using-PCA-Logistic-Regression"
+    link:"https://github.com/Anonymous-847/Heart-Disease-Prediction-using-PCA-Logistic-Regression",
+    preview:"##"
   },
   {
     id:5, name:'Digit Classifier (CNN)', category:'dl',
@@ -94,7 +98,8 @@ const projectsData = [
     stack:['Python','TensorFlow','Keras','CNN'],
     features:['Image Recognition','CNN Architecture','High Accuracy'],
     color:'#3b82f6',
-    link:"https://github.com/Anonymous-847/Handwritten-Digit-Classification-using-CNN"
+    link:"https://github.com/Anonymous-847/Handwritten-Digit-Classification-using-CNN",
+    preview:"##"
   },
   {
     id:6, name:'Digit Classifier (ANN)', category:'dl',
@@ -104,7 +109,8 @@ const projectsData = [
     stack:['Python','ANN','TensorFlow','Deep Learning'],
     features:['Neural Networks','Backpropagation','Classification'],
     color:'#3b82f6',
-    link:"https://github.com/Anonymous-847/Handwritten-Digit-Recognition-using-ANN"
+    link:"https://github.com/Anonymous-847/Handwritten-Digit-Recognition-using-ANN",
+    preview:"##"
   },
   {
     id:7, name:'Smart Customer Intelligence', category:'ml',
@@ -114,18 +120,31 @@ const projectsData = [
     stack:['Python','K-Means','Decision Tree','Data Analysis'],
     features:['Business Intelligence','Multi-Algorithm','Analytics Dashboard'],
     color:'#8b5cf6',
-    link:"https://github.com/Anonymous-847/Smart-Customer-Intelligence-System"
+    link:"https://github.com/Anonymous-847/Smart-Customer-Intelligence-System",
+    preview:"not-available"
   }
   ,
   {
     id:8, name:'Burger Vibe', category:'wd',
-    icon: '⚛️',
+    icon: '🍔',
     catLabel:'Web Development', catClass:'cat-web',
     desc:'Smart analytics system combining K-Means clustering and Decision Tree algorithms to analyze customer behavior and generate intelligent business insights.',
     stack:['Javascript','clerk','react','App Routing'],
     features:['Next JS 15','Cart Context','Clerk Authentication'],
     color:'#8b5cf6',
-    link:"https://github.com/Anonymous-847/Burger-Vibe"
+    link:"https://github.com/Anonymous-847/Burger-Vibe",
+    preview:"not-available"
+  },
+  {
+    id:9, name:'DocMind Rag Based App', category:'ai',
+    icon:'📄',
+    catLabel:'AI / Agentic', catClass:'cat-ai',
+    desc:'A sleek, dark-themed Streamlit app that lets you upload any PDF and have a real-time, streaming conversation with its contents — powered by LangGraph, LangChain, and Mistral AI.',
+    stack:['Langgraph','LangChain','MistralAI','Vector DB', "Loader and Splitter"],
+    features:['Conversational AI','Context-Aware','Real-Time Responses'],
+    color:'#22d3ee',
+    link:"https://github.com/Anonymous-847/rag-using-langgraph",
+    preview:"https://studentrag.streamlit.app/"
   }
 ];
 
@@ -202,7 +221,11 @@ function renderProjects(filter) {
           ${p.stack.map(s => `<span class="stack-tag">${s}</span>`).join('')}
         </div>
         <div class="project-actions">
-          <button class="proj-btn primary">⚡ Live Demo</button>
+<a ${p.preview && p.preview !== "not-available" 
+    ? `href="${p.preview}" target="_blank"` 
+    : `onclick="alert('Live Demo not available')"`}>
+  <button class="proj-btn primary">⚡ Live Demo</button>
+</a>
         <a href="${p.link}" target="_blank"> <button class="proj-btn">⚙️ GitHub</button> </a>
         </div>
       </div>
