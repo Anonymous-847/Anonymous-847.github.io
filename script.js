@@ -55,7 +55,7 @@ const projectsData = [
     features:['Conversational AI','Context-Aware','Real-Time Responses'],
     color:'#22d3ee',
     link:"https://github.com/Anonymous-847/Zoe--AI-Chatbot.git",
-    preview:"not-available"
+    preview:"https://zoe-ai-chatbot.vercel.app/"
   },
   {
     id:2, name:'Customer Segmentation', category:'ml',
