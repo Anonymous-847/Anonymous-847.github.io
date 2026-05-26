@@ -55,7 +55,7 @@ const projectsData = [
     features:['Conversational AI','Context-Aware','Real-Time Responses'],
     color:'#22d3ee',
     link:"https://github.com/Anonymous-847/Zoe--AI-Chatbot.git",
-    preview:"##"
+    preview:"not-available"
   },
   {
     id:2, name:'Customer Segmentation', category:'ml',
@@ -66,7 +66,7 @@ const projectsData = [
     features:['K-Means Clustering','Data Visualization','Business Insights'],
     color:'#8b5cf6',
     link:"https://github.com/Anonymous-847/Customer-Segmentation-using-KMeans-Clustering",
-    preview:"##"
+    preview:"not-available"
   },
   {
     id:3, name:'Salary Prediction', category:'ml',
@@ -77,7 +77,7 @@ const projectsData = [
     features:['Regression Analysis','Feature Engineering','Prediction Model'],
     color:'#8b5cf6',
     link:"https://github.com/Anonymous-847/Placement-Salary-Prediction-System",
-    preview:"##"
+    preview:"not-available"
   },
   {
     id:4, name:'Heart Disease Predictor', category:'ml',
@@ -88,7 +88,7 @@ const projectsData = [
     features:['Medical AI','PCA Reduction','Risk Prediction'],
     color:'#8b5cf6',
     link:"https://github.com/Anonymous-847/Heart-Disease-Prediction-using-PCA-Logistic-Regression",
-    preview:"##"
+    preview:"not-available"
   },
   {
     id:5, name:'Digit Classifier (CNN)', category:'dl',
@@ -99,7 +99,7 @@ const projectsData = [
     features:['Image Recognition','CNN Architecture','High Accuracy'],
     color:'#3b82f6',
     link:"https://github.com/Anonymous-847/Handwritten-Digit-Classification-using-CNN",
-    preview:"##"
+    preview:"not-available"
   },
   {
     id:6, name:'Digit Classifier (ANN)', category:'dl',
@@ -110,7 +110,7 @@ const projectsData = [
     features:['Neural Networks','Backpropagation','Classification'],
     color:'#3b82f6',
     link:"https://github.com/Anonymous-847/Handwritten-Digit-Recognition-using-ANN",
-    preview:"##"
+    preview:"not-available"
   },
   {
     id:7, name:'Smart Customer Intelligence', category:'ml',
