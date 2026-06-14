@@ -11,6 +11,7 @@ const skillsData = {
     {name:'AI Automation',icon:'⚙️',level:80},
     {name:'Conversational AI',icon:'💬',level:88},
     {name:'AI Workflows',icon:'🔄',level:83},
+
   ],
   ml: [
     {name:'Machine Learning',icon:'🧠',level:88},
