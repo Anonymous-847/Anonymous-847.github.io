@@ -146,6 +146,17 @@ const projectsData = [
     color:'#22d3ee',
     link:"https://github.com/Anonymous-847/rag-using-langgraph",
     preview:"https://studentrag.streamlit.app/"
+  },
+  {
+    id:10, name:'Nova AI', category:'ai',
+    icon:'🧠',
+    catLabel:'AI / Agentic', catClass:'cat-ai',
+    desc:'Nova AI is an AI-powered assistant built with Next.js, FastAPI, LangGraph, Mistral AI, and MongoDB, featuring intelligent conversations, persistent chat history, and scalable agent workflows.',
+    stack:['Next.js','LangGraph','MistralAI','TypeScript','MongoDB'],
+    features:['Conversational AI','Context-Aware','Real-Time Responses'],
+    color:'#22d3ee',
+    link:"https://github.com/Anonymous-847/Nova-AI.git",
+    preview:"not-available"
   }
 ];
 
