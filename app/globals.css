@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #05070d;
+  --foreground: #e8ecf3;
+  --cyan: #22d3ee;
+  --blue: #3b82f6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-syne: var(--font-syne);
+  --font-mono: var(--font-jetbrains);
+  --font-sans: var(--font-space-grotesk);
+}
+
+* {
+  scrollbar-color: rgba(34, 211, 238, 0.35) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-syne {
+  font-family: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Applied to <html> by CustomCursor once it mounts, so the native pointer
+   only disappears on devices that actually get the custom cursor. */
+html.custom-cursor-active {
+  cursor: none;
+}
+html.custom-cursor-active a,
+html.custom-cursor-active button {
+  cursor: none;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.25);
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
