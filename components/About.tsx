@@ -41,7 +41,7 @@ export default function About() {
             </ul>
 
             <a
-              href="/Summary.pdf"
+              href="/pdf/cv.pdf"
               download
               className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-white/5 border border-white/15 px-6 py-3 font-mono text-sm text-white transition-all hover:-translate-y-0.5 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-300"
             >
