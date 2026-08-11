@@ -23,18 +23,42 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://faizanahmed.dev"),
   title: "Faizan Ahmed — Agentic AI Engineer",
   description:
     "Faizan Ahmed — Agentic AI Engineer, ML/DL Enthusiast & Full-Stack Web Developer building intelligent autonomous systems.",
-    icons:{
-      icon:"/profile.jpg"
-    },
-  metadataBase: new URL("https://faizanahmed.dev"),
+  icons: {
+    icon: [
+      {
+        url: "/profile.jpg",
+        type: "image/jpeg",
+      },
+    ],
+    shortcut: "/profile.jpg",
+    apple: "/profile.jpg",
+  },
   openGraph: {
     title: "Faizan Ahmed — Agentic AI Engineer",
     description:
       "Agentic AI Engineer, ML/DL Enthusiast & Full-Stack Web Developer building intelligent autonomous systems.",
+    url: "https://faizanahmed.dev",
+    siteName: "Faizan Ahmed Portfolio",
+    images: [
+      {
+        url: "/profile.jpg",
+        width: 800,
+        height: 800,
+        alt: "Faizan Ahmed Profile",
+      },
+    ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Faizan Ahmed — Agentic AI Engineer",
+    description:
+      "Agentic AI Engineer, ML/DL Enthusiast & Full-Stack Web Developer building intelligent autonomous systems.",
+    images: ["/profile.jpg"],
   },
 };
 

@@ -70,6 +70,32 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    id: 100,
+    name: "Elite Digital Hub",
+    category: "wd",
+    icon: "🏢",
+    catLabel: "Web Development",
+    desc: "A Company Website who is selling services and Offers Courses with modern and  responsive UI.",
+    stack: ["Next.js", "Tailwind css", "JavaScript", "Framer Motion", "MongoDB"],
+    features: ["Moderned Design", "Admin Panel", "Interactive and Responsive"],
+    color: "#8b5cf6",
+    link: "https://github.com/Anonymous-847/Elite-Digital-Hub",
+    preview: "https://www.elitedigitalhub.click",
+  },
+  {
+    id: 101,
+    name: "Elite Digital Store",
+    category: "wd",
+    icon: "🛒",
+    catLabel: "Web Development",
+    desc: "A E-Commerce Website who sells Sublimation Shirts, Mugs, Plates, Keychains,Caps and Cushions ",
+    stack: ["Next.js", "Tailwind css", "JavaScript", "Framer Motion", "MongoDB"],
+    features: ["Moderned Design", "Admin Panel", "Interactive and Responsive"],
+    color: "#8b5cf6",
+    link: "https://github.com/Anonymous-847/Elite-Store",
+    preview: "https://www.store.elitedigitalhub.click",
+  },
+  {
     id: 1,
     name: "Zoe AI Chatbot",
     category: "ai",
