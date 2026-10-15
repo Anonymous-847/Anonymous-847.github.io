@@ -1,63 +1,40 @@
-# Faizan Ahmed — Portfolio
+# Faizan Ahmed: Portfolio
 
-Personal portfolio site for Faizan Ahmed, Agentic AI Engineer & Full-Stack
-Developer. Rebuilt from a static HTML/CSS/JS version into **Next.js 16**
-(App Router), **TypeScript**, and **Tailwind CSS v4**.
+Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Motion (animation) and Lenis (smooth scroll).
+Exports to a fully static site.
 
-## Stack
-
-- Next.js 16 (App Router, Turbopack)
-- TypeScript
-- Tailwind CSS v4
-- next/font (Space Grotesk, Syne, JetBrains Mono)
-
-## Getting started
+## Run it
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:3000
+npm run build    # static site in /out
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## Keep your existing `public/` folder
 
-## Before you deploy — two things to swap in
+This redesign uses the same asset paths as before. Copy your current files back in:
 
-1. **Your photo** — `public/profile.jpg` is currently a generated placeholder
-   monogram (not a real photo). Export a square headshot and replace that
-   file with the same name — the About section will pick it up automatically.
+- `public/Faizan.jpeg` : your photo (a monogram shows if it is missing)
+- `public/pdf/cv.pdf`  : your CV (the "Download CV" buttons point here)
 
-2. **Your resume** — `public/resume.pdf` is a placeholder PDF with setup
-   instructions inside it. Export your real resume as a PDF, name it
-   `resume.pdf`, and drop it into `/public`, replacing the placeholder. The
-   "Download Resume" button already links to `/resume.pdf`, so no code
-   changes are needed.
+## Edit content
 
-## Project structure
+Everything lives in `lib/data.ts`: projects, skills, experience, links, copy.
 
-```
-app/
-  layout.tsx        Root layout, fonts, metadata
-  page.tsx           Assembles all sections
-  globals.css        Tailwind import + design tokens
-components/
-  Navbar, Hero, TypedRole, StatCounter, About, Skills, Projects,
-  Education, Journey, Achievements, Contact, Footer,
-  Reveal (scroll-in animation), ParticleBackground, CustomCursor
-lib/
-  data.ts            All content (skills, projects, timeline, etc.)
-```
+- Add a project screenshot: put the image in `public/projects/` and set `image: "/projects/name.png"` on that project. It replaces the generated cover.
+- Featured projects (large stacking cards) are the ones with `featured: true`; the rest appear in the "More projects" list.
+- Experience dates: the Elite Digital Hub and Codexiva entries have no dates yet. Add them in `period`.
 
-To edit any content — projects, skills, achievements, education, social
-links — edit `lib/data.ts`. Nothing else needs to change.
+## Design notes
 
-## Build
-
-```bash
-npm run build
-npm start
-```
+- Colour: cool paper and ink with one ultramarine signal colour (light and dark themes, saved per visitor).
+- Type: Bricolage Grotesque (display) and Geist (text), self-hosted through Fontsource, so there are no Google Fonts requests.
+- Motion: preloader (once per session), masked headline reveals, a live agent-graph hero, scroll-linked text and timelines, stacking project cards, circular theme-switch transition. Everything respects `prefers-reduced-motion`.
 
 ## Deploy
 
-Works out of the box on [Vercel](https://vercel.com) — connect the repo and
-deploy, no config needed.
+- **Vercel / Netlify**: import the repo, no config needed.
+- **GitHub Pages** (user site): build with `npm run build` and publish the `out/` folder, for example with the official "Deploy Next.js to Pages" GitHub Actions workflow (set the Pages source to "GitHub Actions"; the build output directory is `out`).
+
+Set your real domain in `site.url` in `lib/data.ts` (used for social previews).

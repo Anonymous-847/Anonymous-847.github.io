@@ -1,11 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Skills from "@/components/Skills";
+import Focus from "@/components/Focus";
 import Projects from "@/components/Projects";
-import Education from "@/components/Education";
-import Journey from "@/components/Journey";
-import Achievements from "@/components/Achievements";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -13,14 +12,13 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
         <About />
-        <Skills />
+        <Focus />
         <Projects />
-        <Education />
-        <Journey />
-        <Achievements />
+        <Skills />
+        <Experience />
         <Contact />
       </main>
       <Footer />

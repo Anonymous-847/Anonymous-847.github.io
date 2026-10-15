@@ -1,123 +1,191 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Reveal from "./Reveal";
-import { projectsData, type ProjectCategory } from "@/lib/data";
+import { useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import ProjectCover from "./ProjectCover";
+import RevealText from "./RevealText";
+import Counter from "./Counter";
+import { ArrowUpRight, Github } from "./icons";
+import { useMediaQuery } from "@/lib/hooks";
+import { projectsData, type Project } from "@/lib/data";
 
-const filters: { id: ProjectCategory | "all"; label: string }[] = [
-  { id: "all", label: "All Projects" },
-  { id: "ai", label: "AI / Agentic" },
-  { id: "ml", label: "Machine Learning" },
-  { id: "dl", label: "Deep Learning" },
-  { id: "wd", label: "Web Development" },
-];
+const featured = projectsData.filter((p) => p.featured);
+const archive = projectsData.filter((p) => !p.featured);
+const liveCount = projectsData.filter((p) => p.preview).length;
+const coverKind = (p: Project) => (p.category === "wd" ? "web" : p.category);
 
-export default function Projects() {
-  const [active, setActive] = useState<ProjectCategory | "all">("all");
-
-  const filtered = useMemo(
-    () =>
-      active === "all"
-        ? projectsData
-        : projectsData.filter((p) => p.category === active),
-    [active]
-  );
+function StackCard({
+  project,
+  i,
+  total,
+  progress,
+  desktop,
+}: {
+  project: Project;
+  i: number;
+  total: number;
+  progress: MotionValue<number>;
+  desktop: boolean;
+}) {
+  const scale = useTransform(progress, [i / total, 1], [1, 1 - (total - 1 - i) * 0.04]);
 
   return (
-    <section id="projects" className="px-6 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <h2 className="font-syne text-3xl font-bold text-white sm:text-4xl">
-            Featured Work
-          </h2>
-          <p className="mt-3 max-w-xl text-white/50">
-            AI-powered systems, intelligent agents, and machine learning
-            applications built for real-world impact.
-          </p>
-        </Reveal>
+    <div
+      className="mb-6 md:sticky md:mb-[14vh]"
+      style={desktop ? { top: `calc(6.5rem + ${i * 1.1}rem)` } : undefined}
+    >
+      <motion.article
+        style={{ scale: desktop ? scale : 1 }}
+        className="grid origin-top gap-6 overflow-hidden rounded-[2rem] border border-line bg-surface p-3 shadow-[0_30px_70px_-45px_rgba(16,19,28,0.5)] md:grid-cols-12 md:gap-0 md:p-4"
+      >
+        <div className="group relative overflow-hidden rounded-[1.5rem] md:col-span-5 md:min-h-[26rem]">
+          {project.image ? (
+            <Image src={project.image} alt={`${project.name} screenshot`} fill className="object-cover" />
+          ) : (
+            <ProjectCover
+              kind={coverKind(project)}
+              className="h-full min-h-[14rem] transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            />
+          )}
+        </div>
 
-        <Reveal delay={80}>
-          <div className="mt-10 flex flex-wrap gap-2">
-            {filters.map((f) => (
-              <button
-                key={f.id}
-                type="button"
-                onClick={() => setActive(f.id)}
-                className={`rounded-full border px-5 py-2 font-mono text-[13px] transition-all ${
-                  active === f.id
-                    ? "border-cyan-400/60 bg-cyan-400/10 text-cyan-300"
-                    : "border-white/10 text-white/50 hover:border-white/25 hover:text-white/80"
-                }`}
-              >
-                {f.label}
-              </button>
+        <div className="flex flex-col p-3 md:col-span-7 md:p-10">
+          <span className="w-fit rounded-full border border-line px-3.5 py-1 text-sm text-muted">
+            {project.catLabel}
+          </span>
+          <h3 className="mt-5 font-display text-4xl font-semibold tracking-[-0.03em] md:text-5xl">
+            {project.name}
+          </h3>
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">{project.desc}</p>
+
+          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-1 font-medium">
+            {project.features.map((f) => (
+              <li key={f} className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.stack.map((s) => (
+              <span key={s} className="rounded-full bg-bg px-3 py-1 text-sm text-muted">
+                {s}
+              </span>
             ))}
           </div>
-        </Reveal>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((project, i) => (
-            <Reveal key={project.id} delay={(i % 6) * 60}>
-              <article className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.04]">
-                <div className="flex items-start justify-between">
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
-                    style={{ backgroundColor: `${project.color}1a` }}
-                  >
-                    {project.icon}
-                  </div>
-                  <span
-                    className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-wide"
-                    style={{
-                      borderColor: `${project.color}40`,
-                      color: project.color,
-                    }}
-                  >
-                    {project.catLabel}
-                  </span>
-                </div>
+          <div className="mt-auto flex flex-wrap gap-3 pt-8">
+            {project.preview && (
+              <a
+                href={project.preview}
+                target="_blank"
+                rel="noreferrer"
+                className="group/btn inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 font-medium text-signal-ink"
+              >
+                View live
+                <ArrowUpRight className="transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+              </a>
+            )}
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 font-medium transition-colors hover:border-ink"
+            >
+              <Github width={18} height={18} />
+              Source code
+            </a>
+          </div>
+        </div>
+      </motion.article>
+    </div>
+  );
+}
 
-                <h3 className="mt-4 font-syne text-lg font-bold text-white">
-                  {project.name}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-white/55">
-                  {project.desc}
-                </p>
+function ArchiveRow({ p }: { p: Project }) {
+  return (
+    <li>
+      <a
+        href={p.link}
+        target="_blank"
+        rel="noreferrer"
+        className="group relative flex items-center gap-4 overflow-hidden border-b border-line px-2 py-6 md:gap-8 md:px-6 md:py-8"
+        aria-label={`${p.name}, source code on GitHub`}
+      >
+        <span
+          aria-hidden
+          className="absolute inset-0 origin-left scale-x-0 bg-signal transition-transform duration-500 ease-[cubic-bezier(.7,0,.2,1)] group-hover:scale-x-100 group-focus-visible:scale-x-100"
+        />
+        <div className="relative min-w-0 flex-1 transition-colors duration-300 group-hover:text-signal-ink group-focus-visible:text-signal-ink">
+          <h4 className="font-display text-2xl font-semibold tracking-tight md:text-4xl">
+            {p.name}
+          </h4>
+          <p className="mt-1 hidden max-w-2xl truncate text-muted transition-colors duration-300 group-hover:text-signal-ink/80 md:block">
+            {p.desc}
+          </p>
+        </div>
+        <span className="relative hidden text-sm text-muted transition-colors duration-300 group-hover:text-signal-ink/80 sm:block">
+          {p.catLabel}
+        </span>
+        <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full border border-line transition-all duration-500 group-hover:rotate-45 group-hover:border-signal-ink group-hover:text-signal-ink">
+          <ArrowUpRight className="-rotate-45 transition-transform duration-500 group-hover:rotate-0" />
+        </span>
+      </a>
+    </li>
+  );
+}
 
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-md bg-white/[0.04] px-2 py-1 font-mono text-[10px] text-white/50"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+export default function Projects() {
+  const ref = useRef<HTMLDivElement>(null);
+  const desktop = useMediaQuery("(min-width: 768px)");
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
-                <div className="mt-5 flex items-center gap-4 border-t border-white/10 pt-4">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-mono text-xs text-white/70 transition-colors hover:text-cyan-300"
-                  >
-                    ⚡ Code
-                  </a>
-                  {project.preview !== "not-available" && (
-                    <a
-                      href={project.preview}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-mono text-xs text-white/70 transition-colors hover:text-cyan-300"
-                    >
-                      ↗ Live Preview
-                    </a>
-                  )}
-                </div>
-              </article>
-            </Reveal>
+  return (
+    <section id="work" className="px-5 pb-28 md:px-10 md:pb-40">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <RevealText
+            text="Selected work"
+            className="font-display text-5xl font-semibold tracking-[-0.035em] md:text-8xl"
+          />
+          <p className="max-w-xs text-lg text-muted">
+            <span className="font-display text-3xl font-semibold text-ink">
+              <Counter to={projectsData.length} />
+            </span>{" "}
+            projects, with{" "}
+            <span className="font-display text-3xl font-semibold text-ink">
+              <Counter to={liveCount} />
+            </span>{" "}
+            live online.
+          </p>
+        </div>
+
+        <div ref={ref} className="mt-14 md:mt-20">
+          {featured.map((p, i) => (
+            <StackCard
+              key={p.id}
+              project={p}
+              i={i}
+              total={featured.length}
+              progress={scrollYProgress}
+              desktop={desktop}
+            />
           ))}
+        </div>
+
+        <div className="mt-10 md:mt-0">
+          <RevealText
+            text="More projects"
+            as="h3"
+            className="font-display text-3xl font-semibold tracking-tight md:text-5xl"
+          />
+          <ul className="mt-8 border-t border-line">
+            {archive.map((p) => (
+              <ArchiveRow key={p.id} p={p} />
+            ))}
+          </ul>
         </div>
       </div>
     </section>

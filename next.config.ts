@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Static export: deploys to GitHub Pages, Vercel, Netlify or any static host.
+  output: "export",
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

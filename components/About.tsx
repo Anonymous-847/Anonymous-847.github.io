@@ -1,99 +1,123 @@
+"use client";
+
+import { useRef, useState } from "react";
 import Image from "next/image";
-import Reveal from "./Reveal";
-import { aboutInfo, aboutTags } from "@/lib/data";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import RevealText from "./RevealText";
+import { Bolt, Cap, Globe, Pin } from "./icons";
+import { aboutFacts, aboutParagraph, site } from "@/lib/data";
+
+const icons = { pin: Pin, cap: Cap, globe: Globe, bolt: Bolt };
+
+function Word({
+  children,
+  progress,
+  range,
+}: {
+  children: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+}) {
+  const opacity = useTransform(progress, range, [0.16, 1]);
+  return (
+    <motion.span style={{ opacity }} className="mr-[0.26em] inline-block">
+      {children}
+    </motion.span>
+  );
+}
+
+function ScrollParagraph({ text }: { text: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.88", "end 0.55"],
+  });
+  const words = text.split(" ");
+  return (
+    <p
+      ref={ref}
+      className="font-display text-[1.7rem] font-medium leading-[1.25] tracking-tight sm:text-4xl lg:text-[2.6rem]"
+    >
+      {words.map((w, i) => (
+        <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
+          {w}
+        </Word>
+      ))}
+    </p>
+  );
+}
+
+function Portrait() {
+  const [failed, setFailed] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["-7%", "7%"]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ clipPath: "inset(0 0 100% 0)" }}
+      whileInView={{ clipPath: "inset(0 0 0% 0)" }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: 1.2, ease: [0.7, 0, 0.2, 1] }}
+      className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-surface"
+    >
+      {failed ? (
+        <div className="grid h-full w-full place-items-center bg-[color-mix(in_oklab,var(--signal)_10%,var(--surface))] font-display text-8xl font-semibold text-signal">
+          FA
+        </div>
+      ) : (
+        <motion.div style={{ y, scale: 1.18 }} className="absolute inset-0">
+          <Image
+            src={site.photo}
+            alt={`Portrait of ${site.name}`}
+            fill
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="object-cover"
+            onError={() => setFailed(true)}
+          />
+        </motion.div>
+      )}
+    </motion.div>
+  );
+}
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-24 md:px-10 md:py-32">
-      <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
-        {/* Photo + card */}
-        <Reveal>
-          <div className="relative mx-auto max-w-sm">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b1120]">
-              <Image
-                src="/Faizan.jpeg"
-                alt="Faizan Ahmed"
-                width={600}
-                height={600}
-                className="aspect-square w-full object-cover"
-                priority
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#05070d] via-[#05070d]/70 to-transparent p-5">
-                <div className="font-syne text-lg font-bold text-white">
-                  Faizan Ahmed
-                </div>
-                <div className="font-mono text-xs text-cyan-300">
-                  Agentic AI Engineer
-                </div>
-              </div>
+    <section id="about" className="px-5 py-28 md:px-10 md:py-40">
+      <div className="mx-auto max-w-7xl">
+        <RevealText
+          text="A student who ships."
+          className="font-display text-5xl font-semibold leading-[0.98] tracking-[-0.035em] md:text-8xl"
+        />
+
+        <div className="mt-16 grid gap-14 lg:mt-24 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <Portrait />
+              <dl className="mt-6 divide-y divide-line rounded-3xl border border-line bg-surface px-5">
+                {aboutFacts.map((f) => {
+                  const Icon = icons[f.icon];
+                  return (
+                    <div key={f.label} className="flex items-center gap-4 py-4">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-signal/10 text-signal">
+                        <Icon />
+                      </span>
+                      <div>
+                        <dt className="text-sm text-muted">{f.label}</dt>
+                        <dd className="font-medium">{f.text}</dd>
+                      </div>
+                    </div>
+                  );
+                })}
+              </dl>
             </div>
-
-            <ul className="mt-6 space-y-3 rounded-2xl border border-white/10 bg-white/[0.02] p-5">
-              {aboutInfo.map((item) => (
-                <li
-                  key={item.text}
-                  className="flex items-center gap-3 text-sm text-white/70"
-                >
-                  <span className="text-base">{item.icon}</span>
-                  {item.text}
-                </li> 
-              ))}
-            </ul>
-
-            <a
-              href="/pdf/cv.pdf"
-              download
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-white/5 border border-white/15 px-6 py-3 font-mono text-sm text-white transition-all hover:-translate-y-0.5 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-300"
-            >
-              ⬇ Download Resume
-            </a>
-          </div>
-        </Reveal>
-
-        {/* Text */}
-        <Reveal delay={120}>
-          <h3 className="font-syne text-3xl font-bold leading-tight text-white sm:text-4xl">
-            Crafting the
-            <br />
-            <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-              Future of AI
-            </span>
-          </h3>
-
-          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-white/60 sm:text-base">
-            <p>
-              I&apos;m a passionate Agentic AI Engineer and Full-Stack Web
-              Developer currently pursuing a Bachelor&apos;s degree in
-              Information Technology from the University of Gujrat. I
-              specialize in building intelligent AI assistants, autonomous
-              agent systems, machine learning applications, and scalable web
-              platforms.
-            </p>
-            <p>
-              My expertise spans Python, JavaScript, React, Next.js,
-              Express.js, MongoDB, LangChain, LangGraph, AI automation, and
-              deep learning technologies. I&apos;m deeply interested in
-              agentic AI, autonomous systems, AI workflows, and advanced
-              conversational assistants.
-            </p>
-            <p>
-              My goal is to build next-generation intelligent systems that
-              combine automation, reasoning, memory, and human-like
-              interaction.
-            </p>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-2">
-            {aboutTags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 font-mono text-xs text-white/70"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="lg:col-span-7 lg:pt-4">
+            <ScrollParagraph text={aboutParagraph} />
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

@@ -1,46 +1,60 @@
-import { socialLinks } from "@/lib/data";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { ArrowUp } from "./icons";
+import { site } from "@/lib/data";
+
+function useKarachiTime() {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const fmt = new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Asia/Karachi",
+    });
+    const tick = () => setTime(fmt.format(new Date()));
+    const first = setTimeout(tick, 0);
+    const t = setInterval(tick, 30000);
+    return () => {
+      clearTimeout(first);
+      clearInterval(t);
+    };
+  }, []);
+  return time;
+}
 
 export default function Footer() {
-  return (
-    <footer className="border-t border-white/10 px-6 py-10 md:px-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-        <div>
-          <div className="font-syne text-lg font-bold text-white">
-            Faizan Ahmed.
-          </div>
-          <div className="mt-1 font-mono text-xs text-white/40">
-            © {new Date().getFullYear()} — Agentic AI Engineer, Punjab, PK
-          </div>
-        </div>
+  const ref = useRef<HTMLElement>(null);
+  const time = useKarachiTime();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["35%", "0%"]);
 
-        <div className="flex items-center gap-3">
-          <a
-            href={socialLinks.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 font-mono text-xs text-white/60 transition-colors hover:border-cyan-400/40 hover:text-cyan-300"
-          >
-            GH
-          </a>
-          <a
-            href={socialLinks.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 font-mono text-xs text-white/60 transition-colors hover:border-cyan-400/40 hover:text-cyan-300"
-          >
-            LI
-          </a>
-          <a
-            href={`mailto:${socialLinks.email}`}
-            aria-label="Email"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 font-mono text-xs text-white/60 transition-colors hover:border-cyan-400/40 hover:text-cyan-300"
-          >
-            ✉
-          </a>
-        </div>
+  return (
+    <footer ref={ref} className="overflow-hidden px-5 pt-8 md:px-10">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-muted">
+        <p>© {new Date().getFullYear()} {site.name}</p>
+        <p>
+          Local time in Pakistan:{" "}
+          <span className="font-medium text-ink tabular-nums">{time || "--:--"}</span>
+        </p>
+        <a
+          href="#top"
+          className="group inline-flex items-center gap-2 font-medium text-ink"
+        >
+          Back to top
+          <span className="grid h-10 w-10 place-items-center rounded-full border border-line transition-colors group-hover:bg-ink group-hover:text-bg">
+            <ArrowUp />
+          </span>
+        </a>
       </div>
+      <motion.div
+        aria-hidden
+        style={{ y }}
+        className="mx-auto mt-6 max-w-7xl select-none whitespace-nowrap text-center font-display text-[clamp(3rem,15.5vw,16rem)] font-semibold leading-[0.8] tracking-[-0.05em] text-ink/[0.07]"
+      >
+        {site.name}
+      </motion.div>
     </footer>
   );
 }

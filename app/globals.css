@@ -1,55 +1,132 @@
 @import "tailwindcss";
 
 :root {
-  --background: #05070d;
-  --foreground: #e8ecf3;
-  --cyan: #22d3ee;
-  --blue: #3b82f6;
+  --bg: #eef0f4;
+  --surface: #ffffff;
+  --ink: #10131c;
+  --muted: #565d6e;
+  --line: #d3d8e2;
+  --signal: #3340ff;
+  --signal-ink: #ffffff;
+  --mark: #ffe14d;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0c0f1a;
+  --surface: #141829;
+  --ink: #edeff7;
+  --muted: #9097ad;
+  --line: #262b42;
+  --signal: #8b96ff;
+  --signal-ink: #0c0f1a;
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-syne: var(--font-syne);
-  --font-mono: var(--font-jetbrains);
-  --font-sans: var(--font-space-grotesk);
-}
-
-* {
-  scrollbar-color: rgba(34, 211, 238, 0.35) transparent;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-mark: var(--mark);
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
-  scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: clip; /* clip (not hidden) keeps position: sticky working */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.font-syne {
-  font-family: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
-}
-
-.font-mono {
-  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
-}
-
-/* Applied to <html> by CustomCursor once it mounts, so the native pointer
-   only disappears on devices that actually get the custom cursor. */
-html.custom-cursor-active {
-  cursor: none;
-}
-html.custom-cursor-active a,
-html.custom-cursor-active button {
-  cursor: none;
+/* Fine film grain so flat colour never feels sterile */
+body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.25);
-  color: #ffffff;
+  background: var(--mark);
+  color: #10131c;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+* {
+  scrollbar-color: var(--line) transparent;
+}
+
+/* Preloader is skipped for returning visitors / without JS */
+:root[data-seen="1"] .preloader {
+  display: none;
+}
+
+/* Theme switch: circular reveal handled in ThemeToggle.tsx */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(7px, -6px);
+  }
+}
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
