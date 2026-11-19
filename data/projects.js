@@ -25,7 +25,7 @@ export const projects = [
     desc: "A full-stack e-commerce platform with product management, authentication, shopping cart, and checkout functionality.",
     stack: ["Next.js", "MongoDB", "REST API", "Tailwind CSS"],
     github: "",
-    live: "",
+    live: "https://store.elitedigitalhub.click/",
     hue: 38,
   },
 
