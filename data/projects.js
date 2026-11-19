@@ -1,0 +1,73 @@
+// glyph: which emblem ProjectArt draws (hub | store | portal | rishta | interior)
+// accent: neon colour used for that project's cover art
+export const projects = [
+  {
+    id: "elite-digital-hub",
+    category: "Digital Agency",
+    glyph: "hub",
+    accent: "#2cff7a",
+    image: "",
+    name: "Elite Digital Hub",
+    desc: "A full-stack digital agency platform featuring services, courses, blogs, admissions, and business solutions.",
+    stack: ["Next.js", "MongoDB", "Tailwind CSS", "Node.js"],
+    github: "",
+    live: "https://elitedigitalhub.click/",
+    hue: 140,
+  },
+
+  {
+    id: "elite-digital-store",
+    category: "E-commerce",
+    glyph: "store",
+    accent: "#ffb020",
+    image: "",
+    name: "Elite Digital Store",
+    desc: "A full-stack e-commerce platform with product management, authentication, shopping cart, and checkout functionality.",
+    stack: ["Next.js", "MongoDB", "REST API", "Tailwind CSS"],
+    github: "",
+    live: "",
+    hue: 38,
+  },
+
+  {
+    id: "skynex-portal",
+    category: "Web Platform",
+    glyph: "portal",
+    accent: "#35d6ff",
+    image: "",
+    name: "SkyNex Portal",
+    desc: "A modern web portal designed for managing information, users, and digital operations.",
+    stack: ["React", "Node.js", "MongoDB", "REST API"],
+    github: "",
+    live: "",
+    hue: 190,
+  },
+
+  {
+    id: "madani-rishta",
+    category: "Web Platform",
+    glyph: "rishta",
+    accent: "#ff3b6b",
+    image: "",
+    name: "Madani Rishta",
+    desc: "A matchmaking platform designed to connect individuals and simplify the rishta search process.",
+    stack: ["Web Development", "Full Stack"],
+    github: "",
+    live: "https://madanirishta.com/",
+    hue: 345,
+  },
+
+  {
+    id: "abu-muhammad-interiors",
+    category: "Business Website",
+    glyph: "interior",
+    accent: "#ff2e3e",
+    image: "",
+    name: "Abu Muhammad Interiors Bahrain",
+    desc: "A professional online presence showcasing interior design services and business offerings in Bahrain.",
+    stack: ["Web Development", "Responsive UI"],
+    github: "",
+    live: "https://www.abumuhammadinteriors.com/",
+    hue: 355,
+  },
+];
